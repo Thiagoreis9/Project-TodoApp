@@ -1,0 +1,25 @@
+* Prototyping tools;
+	- Justinmind,
+	- In Vision,
+	- Origami,
+	- Proto.io,
+	- Fluid,
+	- Codiga,
+	- Pixate,
+	- Ninja Mock,
+	- AdobeXD.
+
+* Color palette definition;
+	- Coolors,
+	- AdobeColor,
+	- Shutterstock Palette,
+	- Colourcode,
+	- Flat UI Colors
+	- Material Design Colors 
+
+* Icons;
+	- Flaticon,
+	- icons8.
+
+* Images;
+	- Shutterstock,

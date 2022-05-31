@@ -1,0 +1,22 @@
+XAMPP APACHE:
+- MySQL.
+
+BD tables:
+
+*PROJECTS
+	- id (int) not NULL Primary key AUTO INCREMENT,
+	- name(VARCHAR(50) not NULL),
+	- description(VARCHAR(255)),
+	- createAt(DATETIME not NULL),
+	- updateAt(DATETIME not NULL).
+
+*TASKS
+	- id (int) not NULL Primary key AUTO INCREMENT,
+	- idProject (int) not NULL Foreign key,
+	- name(VARCHAR(50) not NULL),
+	- description(VARCHAR(255)),
+	- completed(BOOLEAN not NULL),
+	- notes(VARCHAR(255)),
+	- deadline(DATE not NULL),
+	- createAt(DATETIME not NULL),
+	- updateAt(DATETIME not NULL).
