@@ -37,5 +37,20 @@ Business rules:
 * Every task must belong to a project;
 
 Technologies used:
-* java;
+* Java;
 * MySql;
+
+Development progress:
+* Creation Database (OK)
+* Creation model classes (OK)
+* Creation conection with Database (OK)
+* Creation Grafical Interface
+	- Creation main screens
+		- Creation of CellRederer deadline
+		- Creation of CellRederer edit/delete
+	- Creation of the project registration screen
+	- creation of the task registration screen
+* Events of implementation
+	-  Validate
+* Final settings
+* Aplication test
