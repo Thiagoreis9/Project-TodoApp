@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import java.awt.Color;
 import java.awt.Font;
 
-/**
- *
- * @author Ryuzaki
- */
 public final class MainScreen extends javax.swing.JFrame {
 
     /**
@@ -18,6 +10,7 @@ public final class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        //Chamando o metodo que vai aplicar as modificações na TableTask
         decorateTableTasks();
     }
 
@@ -359,6 +352,7 @@ public final class MainScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void decorateTableTasks(){
+        
         //Customizando o Header da table de tarefas
         jTableTasks.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         jTableTasks.getTableHeader().setBackground(new Color(0, 153, 102));

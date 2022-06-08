@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import model.Task;
 import util.ConnectionFactory;
@@ -20,8 +22,8 @@ public class TaskController {
                 + " completed,"
                 + " notes,"
                 + " deadline,"
-                + " createAt,"
-                + " updateAt VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + " createdAt,"
+                + " updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         //Declaracao da conexão e do statement.
         Connection connection = null;
@@ -41,12 +43,12 @@ public class TaskController {
             statement.setString(3, task.getDescription());
             statement.setBoolean(4, task.getIsCompleted());
             statement.setString(5, task.getNotes());
-            statement.setDate(6, new Date(task.getDeadline().getTime()));
-            statement.setDate(7, new Date(task.getCreatedAt().getTime()));
-            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+            statement.setDate(6, new java.sql.Date(task.getDeadline().getTimeInMillis()));
+            statement.setDate(7, new java.sql.Date(task.getCreatedAt().getTimeInMillis()));
+            statement.setDate(8, new java.sql.Date(task.getUpdatedAt().getTimeInMillis()));
             statement.execute();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao adicionar a tarefa!" + ex.getMessage());
         } finally {
             //Encerrando as conexões com o BD.
@@ -86,15 +88,15 @@ public class TaskController {
             statement.setString(3, task.getDescription());
             statement.setString(4, task.getNotes());
             statement.setBoolean(5, task.getIsCompleted());
-            statement.setDate(6, new Date(task.getDeadline().getTime()));
-            statement.setDate(7, new Date(task.getCreatedAt().getTime()));
-            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+            statement.setDate(6, new java.sql.Date(task.getDeadline().getTimeInMillis()));
+            statement.setDate(7, new java.sql.Date(task.getCreatedAt().getTimeInMillis()));
+            statement.setDate(8, new java.sql.Date(task.getUpdatedAt().getTimeInMillis()));
             statement.setInt(9, task.getId());
             
             //Executando a query.
             statement.execute();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Nao foi possivel alterar a tarefa!" + ex.getMessage());
         } finally {
             //Encerrando as conexões com o BD.
@@ -124,7 +126,7 @@ public class TaskController {
             //Executando a query;
             statement.execute();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao deletar a task" + ex.getMessage());
         } finally {
             //Encerrando as conexões com o BD.
@@ -146,7 +148,7 @@ public class TaskController {
         ResultSet resultSet = null;
         
         //Lista de tarefas que será devolvida quando a chamada do metodo acontecer
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
         
         try {
             
@@ -169,6 +171,7 @@ public class TaskController {
                 //Instancia da nova tarefa.
                 Task task = new Task();
                 
+                
                 //Atribuindo os valores a nova tarefa.
                 task.setId(resultSet.getInt("id"));
                 task.setIdProject(resultSet.getInt("idProject"));
@@ -176,9 +179,22 @@ public class TaskController {
                 task.setDescription(resultSet.getString("description"));
                 task.setNotes(resultSet.getString("notes"));
                 task.setIsCompleted(resultSet.getBoolean("completed"));
-                task.setDeadline(resultSet.getDate("deadline"));
-                task.setCreatedAt(resultSet.getDate("createdAt"));
-                task.setUpdatedAt(resultSet.getDate("updatedAt"));
+                    
+                    Calendar data = Calendar.getInstance();
+                    java.sql.Date deadline = resultSet.getDate("deadline");
+                    data.setTime(new java.util.Date(deadline.getTime()));
+                    task.setDeadline(data);
+                    
+                    java.sql.Date createdAt = resultSet.getDate("createdAt");
+                    data.setTime(new java.util.Date(createdAt.getTime()));
+                    task.setCreatedAt(data);
+                    
+                    java.sql.Date updatedAt = resultSet.getDate("updatedAt");
+                    data.setTime(new java.util.Date(updatedAt.getTime()));
+                    task.setUpdatedAt(data);
+                    
+                //task.setCreatedAt(resultSet.getDate("createdAt"));
+                //task.setUpdatedAt(resultSet.getDate("updatedAt"));
                 
                 //Adicionando a nova tarefa a lista de tarefas.
                 tasks.add(task);
@@ -186,7 +202,7 @@ public class TaskController {
             }
             
             
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao pegar todas as tarefas do projeto! " + ex.getMessage());
         } finally{
             //Encerrando as conexões com o BD.

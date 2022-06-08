@@ -18,7 +18,7 @@ public class ConnectionFactory {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch(ClassNotFoundException | SQLException ex){
-            throw new RuntimeException("Erro de conex√£o com o banco de dados");
+            throw new RuntimeException("Erro de conex„o com o banco de dados");
         }
     } 
     

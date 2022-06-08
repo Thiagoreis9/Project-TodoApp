@@ -1,16 +1,16 @@
 package model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Project {
     
     private int id;
     private String name;
     private String description;
-    private Date createdAt;
-    private Date updatedAt;
+    private Calendar createdAt;
+    private Calendar updatedAt;
     
-    public Project(String name, String description, Date createdAt, Date updatedAt) {
+    public Project(String name, String description, Calendar createdAt, Calendar updatedAt) {
       
         this.name = name;
         this.description = description;
@@ -46,19 +46,21 @@ public class Project {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
+    public Calendar getCreatedAt() {
+        createdAt = Calendar.getInstance();
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Calendar createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Calendar getUpdatedAt() {
+        updatedAt = Calendar.getInstance();
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Calendar updatedAt) {
         this.updatedAt = updatedAt;
     }
 

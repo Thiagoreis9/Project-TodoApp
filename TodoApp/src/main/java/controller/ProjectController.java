@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import model.Project;
 import util.ConnectionFactory;
@@ -18,7 +19,7 @@ public class ProjectController {
         String sql = "INSERT INTO projects (name, "
                 + "description, "
                 + "createdAt, "
-                + "updatedAt, "             
+                + "updatedAt) "             
                 + "VALUES (?, ?, ?, ?)";
         
         Connection connection = null;
@@ -31,8 +32,8 @@ public class ProjectController {
             
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
-            statement.setDate(3, (Date) project.getCreatedAt());
-            statement.setDate(4, (Date) project.getUpdatedAt());
+            statement.setDate(3, new java.sql.Date(project.getCreatedAt().getTimeInMillis()));
+            statement.setDate(4, new java.sql.Date(project.getUpdatedAt().getTimeInMillis()));
             
             statement.execute();
             
@@ -60,11 +61,12 @@ public class ProjectController {
             
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
+            Calendar calendar = Calendar.getInstance();
             
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
-            statement.setDate(3, new Date(project.getCreatedAt().getTime()));
-            statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
+            statement.setDate(3, new java.sql.Date(project.getCreatedAt().getTimeInMillis()));
+            statement.setDate(4, new java.sql.Date(project.getUpdatedAt().getTimeInMillis()));
             statement.setInt(5, project.getId());
             
             statement.execute();
@@ -99,12 +101,22 @@ public class ProjectController {
             while (resultSet.next()) {
 
                 Project project = new Project();
+                
+                
 
                 project.setId(resultSet.getInt("id"));
                 project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
-                project.setCreatedAt(resultSet.getDate("createdAt"));
-                project.setCreatedAt(resultSet.getDate("updatedAt"));
+                
+                //project.setCreatedAt(new java.sql.Date(resultSet.getDate("createdAt")));
+                    Calendar data = Calendar.getInstance();
+                    java.sql.Date createdAt = resultSet.getDate("createdAt");
+                    data.setTime(new java.util.Date(createdAt.getTime()));
+                    project.setCreatedAt(data);
+                //project.setCreatedAt(resultSet.getDate("updatedAt"));
+                    java.sql.Date updatedAt = resultSet.getDate("updatedAt");
+                    data.setTime(new java.util.Date(updatedAt.getTime()));
+                    project.setUpdatedAt(data);
 
                 //Adiciono o contato recuperado, a lista de contatos
                 projects.add(project);

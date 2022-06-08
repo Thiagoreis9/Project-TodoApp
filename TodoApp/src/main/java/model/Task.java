@@ -1,7 +1,6 @@
 package model;
 
-import java.util.Date;
-
+import java.util.Calendar;
 
 public class Task {
     
@@ -11,11 +10,11 @@ public class Task {
     private String description;
     private String notes;
     private boolean isCompleted;
-    private Date deadline;
-    private Date createdAt;
-    private Date updatedAt;
+    private Calendar deadline;
+    private Calendar createdAt;
+    private Calendar updatedAt;
 
-    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Date createdAt, Date updatedAt) {
+    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Calendar deadline, Calendar createdAt, Calendar updatedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
@@ -28,8 +27,8 @@ public class Task {
     }
     
     public Task() {
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
+        this.createdAt = Calendar.getInstance();
+        this.updatedAt = Calendar.getInstance();
         
     }
 
@@ -81,27 +80,31 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public Date getDeadline() {
+    public Calendar getDeadline() {
+        deadline = Calendar.getInstance();
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Calendar deadline) {
         this.deadline = deadline;
     }
 
-    public Date getCreatedAt() {
+    public Calendar getCreatedAt() {
+        createdAt = Calendar.getInstance();
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Calendar createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Calendar getUpdatedAt() {
+        updatedAt = Calendar.getInstance();
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Calendar updatedAt) {
+        updatedAt = Calendar.getInstance();
         this.updatedAt = updatedAt;
     }
 
