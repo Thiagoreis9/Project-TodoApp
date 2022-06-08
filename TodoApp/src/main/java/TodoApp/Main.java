@@ -1,26 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-
 package TodoApp;
 
-import java.sql.Connection;
-import util.ConnectionFactory;
+import controller.ProjectController;
+import java.util.Calendar;
+import model.Project;
 
-/**
- *
- * @author Ryuzaki
- */
 public class Main {
 
     public static void main(String[] args) {
         
-        Connection c = ConnectionFactory.getConnection();
+        ProjectController projectController = new ProjectController();
+       
+        Project project = new Project();
         
-        ConnectionFactory.closeConnection(c);
+        
+        project.setName("projeto teste");
+        project.setDescription("description");
+
         
         
+        projectController.save(project);
 
     }
 

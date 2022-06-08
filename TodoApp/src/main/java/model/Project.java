@@ -10,12 +10,16 @@ public class Project {
     private Date createdAt;
     private Date updatedAt;
     
-    public Project(int id, String name, String description, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public Project(String name, String description, Date createdAt, Date updatedAt) {
+      
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        
+    }
+    
+    public Project(){
     }
 
     public int getId() {
@@ -62,7 +66,5 @@ public class Project {
     public String toString() {
         return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
-    
-    
     
 }
