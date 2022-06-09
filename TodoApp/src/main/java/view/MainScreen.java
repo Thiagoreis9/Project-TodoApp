@@ -1,5 +1,6 @@
 package view;
 
+import controller.TaskController;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -10,7 +11,8 @@ public final class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        //Chamando o metodo que vai aplicar as modificaÁıes na TableTask
+        
+        //Chamando o metodo que vai aplicar as modificaÁıes na Table
         decorateTableTasks();
     }
 
@@ -57,7 +59,7 @@ public final class MainScreen extends javax.swing.JFrame {
         jLabelEmptyListSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelEmptyListSubTitle.setForeground(new java.awt.Color(153, 153, 153));
         jLabelEmptyListSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelEmptyListSubTitle.setText("Clique no bot√£o '+' para adicionar uma nova tarefa");
+        jLabelEmptyListSubTitle.setText("Clique no bot„o '+' para adicionar uma nova tarefa");
 
         javax.swing.GroupLayout jPanelEmptyListLayout = new javax.swing.GroupLayout(jPanelEmptyList);
         jPanelEmptyList.setLayout(jPanelEmptyListLayout);
@@ -96,7 +98,7 @@ public final class MainScreen extends javax.swing.JFrame {
 
         jLabelToolBarSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelToolBarSubTitle.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelToolBarSubTitle.setText(" Anote tudo, n√£o esque√ßa de nada");
+        jLabelToolBarSubTitle.setText(" Anote tudo, nao esqueca de nada");
 
         javax.swing.GroupLayout jPanelToolBarLayout = new javax.swing.GroupLayout(jPanelToolBar);
         jPanelToolBar.setLayout(jPanelToolBarLayout);
@@ -127,6 +129,11 @@ public final class MainScreen extends javax.swing.JFrame {
         jLabelProjectsTitle.setText("Projetos");
 
         jLabelProjectsAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        jLabelProjectsAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelProjectsAddMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelProjectsLayout = new javax.swing.GroupLayout(jPanelProjects);
         jPanelProjects.setLayout(jPanelProjectsLayout);
@@ -157,6 +164,11 @@ public final class MainScreen extends javax.swing.JFrame {
         jLabelTasksTitle.setText("Tarefas");
 
         jLabelTasksAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        jLabelTasksAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelTasksAddMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTasksLayout = new javax.swing.GroupLayout(jPanelTasks);
         jPanelTasks.setLayout(jPanelTasksLayout);
@@ -182,9 +194,7 @@ public final class MainScreen extends javax.swing.JFrame {
         jPanelProjectList.setBackground(java.awt.Color.white);
         jPanelProjectList.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jListProjects.setBackground(new java.awt.Color(255, 255, 255));
         jListProjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jListProjects.setForeground(new java.awt.Color(0, 0, 0));
         jListProjects.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -214,7 +224,6 @@ public final class MainScreen extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTableTasks.setBackground(new java.awt.Color(255, 255, 255));
         jTableTasks.setForeground(new java.awt.Color(0, 153, 102));
         jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,7 +233,7 @@ public final class MainScreen extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Descri√ß√£o", "Prazo", "Tarefa Conclu√≠da"
+                "Nome", "Descricao", "Prazo", "Tarefa Concluida"
             }
         ) {
             Class[] types = new Class [] {
@@ -294,6 +303,24 @@ public final class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabelProjectsAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProjectsAddMouseClicked
+        
+        //Ao clicar È criado o objeto da tela de dialogo do projeto
+        ProjectDialogScreen projectDialogScreen = new ProjectDialogScreen(this, rootPaneCheckingEnabled);
+        //Habilita a visibilidade da tela de dialogo do projeto
+        projectDialogScreen.setVisible(true);
+  
+    }//GEN-LAST:event_jLabelProjectsAddMouseClicked
+
+    private void jLabelTasksAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTasksAddMouseClicked
+        
+        //Ao clicar È criado o objeto da tela de dialogo de tarefa
+        TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled);
+        //Habilita a visibilidade da tela de dialogo de tarefa
+        taskDialogScreen.setVisible(true);
+
+    }//GEN-LAST:event_jLabelTasksAddMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -310,15 +337,11 @@ public final class MainScreen extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -357,8 +380,9 @@ public final class MainScreen extends javax.swing.JFrame {
         jTableTasks.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         jTableTasks.getTableHeader().setBackground(new Color(0, 153, 102));
         jTableTasks.getTableHeader().setForeground(new Color(255, 255, 255));
-
-       
+        
+        //Criando um sort automatico para as colunas da table
+        jTableTasks.setAutoCreateRowSorter(true);
         
         
         

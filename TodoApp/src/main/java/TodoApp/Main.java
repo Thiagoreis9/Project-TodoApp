@@ -9,9 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         
-        ProjectController projectController = new ProjectController();
+        //ProjectController projectController = new ProjectController();
         
-        TaskController taskController = new TaskController();
+        //TaskController taskController = new TaskController();
         
         //Project project = new Project();
         
@@ -32,7 +32,7 @@ public class Main {
 
         
         //taskController.removeById(2);
-        projectController.getAll();
+        //projectController.getAll();
         
         //taskController.getAll(1);
         //taskController.save(task);
