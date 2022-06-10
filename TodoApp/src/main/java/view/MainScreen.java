@@ -316,6 +316,8 @@ public final class MainScreen extends javax.swing.JFrame {
         
         //Ao clicar é criado o objeto da tela de dialogo de tarefa
         TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled);
+        //comentar aqui
+        taskDialogScreen.setProject(null);
         //Habilita a visibilidade da tela de dialogo de tarefa
         taskDialogScreen.setVisible(true);
 

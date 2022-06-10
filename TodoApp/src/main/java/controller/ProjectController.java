@@ -1,8 +1,6 @@
 package controller;
 
 import java.sql.Connection;
-import java.sql.Date;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,7 +59,6 @@ public class ProjectController {
             
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
-            Calendar calendar = Calendar.getInstance();
             
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
@@ -101,22 +98,20 @@ public class ProjectController {
             while (resultSet.next()) {
 
                 Project project = new Project();
-                
-                
 
                 project.setId(resultSet.getInt("id"));
                 project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
                 
                 //project.setCreatedAt(new java.sql.Date(resultSet.getDate("createdAt")));
-                    Calendar data = Calendar.getInstance();
-                    java.sql.Date createdAt = resultSet.getDate("createdAt");
-                    data.setTime(new java.util.Date(createdAt.getTime()));
-                    project.setCreatedAt(data);
+                Calendar data = Calendar.getInstance();
+                java.sql.Date createdAt = resultSet.getDate("createdAt");
+                data.setTime(new java.util.Date(createdAt.getTime()));
+                project.setCreatedAt(data);
                 //project.setCreatedAt(resultSet.getDate("updatedAt"));
-                    java.sql.Date updatedAt = resultSet.getDate("updatedAt");
-                    data.setTime(new java.util.Date(updatedAt.getTime()));
-                    project.setUpdatedAt(data);
+                java.sql.Date updatedAt = resultSet.getDate("updatedAt");
+                data.setTime(new java.util.Date(updatedAt.getTime()));
+                project.setUpdatedAt(data);
 
                 //Adiciono o contato recuperado, a lista de contatos
                 projects.add(project);
