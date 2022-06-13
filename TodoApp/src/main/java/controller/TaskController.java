@@ -178,21 +178,7 @@ public class TaskController {
                 task.setName(resultSet.getString("name"));
                 task.setDescription(resultSet.getString("description"));
                 task.setNotes(resultSet.getString("notes"));
-                task.setIsCompleted(resultSet.getBoolean("completed"));
-                    
-                    Calendar data = Calendar.getInstance();
-                    java.sql.Date deadline = resultSet.getDate("deadline");
-                    data.setTime(new java.util.Date(deadline.getTime()));
-                    task.setDeadline(data);
-                    
-                    java.sql.Date createdAt = resultSet.getDate("createdAt");
-                    data.setTime(new java.util.Date(createdAt.getTime()));
-                    task.setCreatedAt(data);
-                    
-                    java.sql.Date updatedAt = resultSet.getDate("updatedAt");
-                    data.setTime(new java.util.Date(updatedAt.getTime()));
-                    task.setUpdatedAt(data);
-                    
+                task.setIsCompleted(resultSet.getBoolean("completed"));  
                 //task.setCreatedAt(resultSet.getDate("createdAt"));
                 //task.setUpdatedAt(resultSet.getDate("updatedAt"));
                 

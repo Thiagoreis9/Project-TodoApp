@@ -87,7 +87,7 @@ public class Task {
     }
 
     public void setDeadline(Calendar deadline) {
-        this.deadline = deadline;
+        this.deadline = Calendar.getInstance();
     }
 
     public Calendar getCreatedAt() {
@@ -96,7 +96,7 @@ public class Task {
     }
 
     public void setCreatedAt(Calendar createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = Calendar.getInstance();
     }
 
     public Calendar getUpdatedAt() {

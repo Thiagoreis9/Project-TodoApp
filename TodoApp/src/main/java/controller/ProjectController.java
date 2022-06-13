@@ -96,23 +96,16 @@ public class ProjectController {
 
             //Enquanto existir dados no banco de dados, fa�a
             while (resultSet.next()) {
-
+                
+                //Instancia do novo projeto.
                 Project project = new Project();
 
                 project.setId(resultSet.getInt("id"));
                 project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
+                //project.setCreatedAt(resultSet.getDate("createdAt"));
+                //project.setUpdatedAt(resultSet.getDate("updatedAt"));
                 
-                //project.setCreatedAt(new java.sql.Date(resultSet.getDate("createdAt")));
-                Calendar data = Calendar.getInstance();
-                java.sql.Date createdAt = resultSet.getDate("createdAt");
-                data.setTime(new java.util.Date(createdAt.getTime()));
-                project.setCreatedAt(data);
-                //project.setCreatedAt(resultSet.getDate("updatedAt"));
-                java.sql.Date updatedAt = resultSet.getDate("updatedAt");
-                data.setTime(new java.util.Date(updatedAt.getTime()));
-                project.setUpdatedAt(data);
-
                 //Adiciono o contato recuperado, a lista de contatos
                 projects.add(project);
             }

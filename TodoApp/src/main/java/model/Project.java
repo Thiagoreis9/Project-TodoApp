@@ -20,6 +20,7 @@ public class Project {
     }
     
     public Project(){
+        
     }
 
     public int getId() {
@@ -52,7 +53,7 @@ public class Project {
     }
 
     public void setCreatedAt(Calendar createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = Calendar.getInstance();
     }
 
     public Calendar getUpdatedAt() {
@@ -61,12 +62,12 @@ public class Project {
     }
 
     public void setUpdatedAt(Calendar updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updatedAt = Calendar.getInstance();
     }
-
+    
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+        return  "  " + this.name + "  ";
     }
     
 }
