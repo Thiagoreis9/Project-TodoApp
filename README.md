@@ -44,8 +44,8 @@ Development progress:
 * Creation Database (OK)
 * Creation model classes (OK)
 * Creation conection with Database (OK)
-* Creation Grafical Interface
-	- Creation main screens
+* Creation Grafical Interface (OK)
+	- Creation main screens (OK)
 		- Creation of CellRederer deadline
 		- Creation of CellRederer edit/delete
 	- Creation of the project registration screen
