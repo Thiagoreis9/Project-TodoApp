@@ -4,6 +4,9 @@ import controller.ProjectController;
 import controller.TaskController;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
@@ -301,7 +304,16 @@ public final class MainScreen extends javax.swing.JFrame {
         ProjectDialogScreen projectDialogScreen = new ProjectDialogScreen(this, rootPaneCheckingEnabled);
         //Habilita a visibilidade da tela de dialogo do projeto
         projectDialogScreen.setVisible(true);
-  
+        
+        //Este listener (ouvinte) serve para monitorar quando a janela jLabelProjectsAddMouseClicked for fechada.
+        projectDialogScreen.addWindowListener(new WindowAdapter() {
+            //Quando a janela for fechada ele executa o que esta dentro do metodo
+            public void windowClosed(WindowEvent e){
+                //executa novamente o carregamento dos projetos na lista
+                loadProjects();
+            }
+        });
+        
     }//GEN-LAST:event_jLabelProjectsAddMouseClicked
 
     private void jLabelTasksAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTasksAddMouseClicked
@@ -399,7 +411,7 @@ public final class MainScreen extends javax.swing.JFrame {
         
         projectModel.clear();
         
-        for (int i = 0; i < projects.size() - 1; i++) {
+        for (int i = 0; i < projects.size(); i++) {
             
             Project project = projects.get(i);
             projectModel.addElement(project);
