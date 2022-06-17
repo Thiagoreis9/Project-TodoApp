@@ -6,7 +6,11 @@ package view;
 
 import controller.TaskController;
 import java.awt.HeadlessException;
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Project;
 import model.Task;
@@ -208,7 +212,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
             //Quando clicado no botao de save...
             //A task é 'criada' instanciada
             Task task = new Task();
-            task.setIdProject(1);
+            task.setIdProject(project.getId());
             
             //task.setName recebe o texto inserido no text area do nome
             task.setName(jTextFieldName.getText());
@@ -218,14 +222,11 @@ public class TaskDialogScreen extends javax.swing.JDialog {
             task.setNotes(jTextAreaNotes.getText());
             //task.setIsCompleted recebe falso pois a tarefa nao foi concluida
             task.setIsCompleted(false);
-//            Calendar deadline = Calendar.getInstance();
-//
-//            task.setDeadline(new java.sql.Date(deadline.getTimeInMillis()));
             
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            Date deadline=null;
-//            deadline = dateFormat.parse(jFormattedTextFieldDeadline.getText());
-//            task.setDeadline(deadline);           
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date data = dateFormat.parse(jFormattedTextFieldDeadline.getText());
+
+            task.setDeadline(data);           
             
             //Apos atribuir os valores salva a tarefa no Banco de Dados
             taskControler.save(task);
@@ -235,7 +236,9 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         } catch (HeadlessException e) {
             //Caso ocorra alguma falha mostra mensagem de falha
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        } 
+        } catch (ParseException ex) { 
+            Logger.getLogger(TaskDialogScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //Apos terminar o cadastro do projeto o dispose fecha a janela
         this.dispose();

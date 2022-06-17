@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,7 +42,7 @@ public class TaskController {
             statement.setString(3, task.getDescription());
             statement.setBoolean(4, task.getIsCompleted());
             statement.setString(5, task.getNotes());
-            statement.setDate(6, new java.sql.Date(task.getDeadline().getTimeInMillis()));
+            statement.setDate(6, new java.sql.Date(task.getDeadline().getTime()));
             statement.setDate(7, new java.sql.Date(task.getCreatedAt().getTimeInMillis()));
             statement.setDate(8, new java.sql.Date(task.getUpdatedAt().getTimeInMillis()));
             statement.execute();
@@ -61,14 +60,14 @@ public class TaskController {
         
         //Criação da query SQL.
         String sql = "UPDATE tasks SET "
-                + "idProject = ?"
-                + "name = ?"
-                + "description = ?"
-                + "notes = ?"
-                + "completed = ?"                
-                + "deadline = ?"
-                + "createAt = ?"
-                + "updateAt = ?"
+                + "idProject = ?, "
+                + "name = ?, "
+                + "description = ?, "
+                + "notes = ?, "
+                + "completed = ?, "
+                + "deadline = ?, "
+                + "createdAt = ?, "
+                + "updatedAt = ? "
                 + "WHERE id = ?";
         
         //Declaracao da conexão e do statement.
@@ -88,7 +87,7 @@ public class TaskController {
             statement.setString(3, task.getDescription());
             statement.setString(4, task.getNotes());
             statement.setBoolean(5, task.getIsCompleted());
-            statement.setDate(6, new java.sql.Date(task.getDeadline().getTimeInMillis()));
+            statement.setDate(6, new java.sql.Date(task.getDeadline().getTime()));
             statement.setDate(7, new java.sql.Date(task.getCreatedAt().getTimeInMillis()));
             statement.setDate(8, new java.sql.Date(task.getUpdatedAt().getTimeInMillis()));
             statement.setInt(9, task.getId());
@@ -99,7 +98,7 @@ public class TaskController {
         } catch (SQLException ex) {
             throw new RuntimeException("Nao foi possivel alterar a tarefa!" + ex.getMessage());
         } finally {
-            //Encerrando as conexões com o BD.
+            //Encerrando as conexoes com o BD.
             ConnectionFactory.closeConnection(connection, statement);
         }
     }
@@ -170,24 +169,30 @@ public class TaskController {
                 
                 //Instancia da nova tarefa.
                 Task task = new Task();
-                
-                
+
                 //Atribuindo os valores a nova tarefa.
                 task.setId(resultSet.getInt("id"));
                 task.setIdProject(resultSet.getInt("idProject"));
                 task.setName(resultSet.getString("name"));
                 task.setDescription(resultSet.getString("description"));
                 task.setNotes(resultSet.getString("notes"));
-                task.setIsCompleted(resultSet.getBoolean("completed"));  
-                //task.setCreatedAt(resultSet.getDate("createdAt"));
-                //task.setUpdatedAt(resultSet.getDate("updatedAt"));
+                task.setIsCompleted(resultSet.getBoolean("completed")); 
+                task.setDeadline(resultSet.getDate("deadline"));
                 
+                Calendar data = Calendar.getInstance();
+                java.sql.Date createdAt = resultSet.getDate("createdAt");
+                data.setTime(new java.util.Date(createdAt.getTime()));
+                task.setCreatedAt(data);
+                
+                java.sql.Date updatedAt = resultSet.getDate("updatedAt");
+                data.setTime(new java.util.Date(updatedAt.getTime()));
+                task.setUpdatedAt(data);
+
                 //Adicionando a nova tarefa a lista de tarefas.
                 tasks.add(task);
   
             }
-            
-            
+
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao pegar todas as tarefas do projeto! " + ex.getMessage());
         } finally{

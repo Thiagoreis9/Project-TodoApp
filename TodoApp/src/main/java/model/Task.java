@@ -11,11 +11,11 @@ public class Task {
     private String description;
     private String notes;
     private boolean isCompleted;
-    private Calendar deadline;
+    private Date deadline;
     private Calendar createdAt;
     private Calendar updatedAt;
 
-    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Calendar deadline, Calendar createdAt, Calendar updatedAt) {
+    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Calendar createdAt, Calendar updatedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
@@ -28,9 +28,9 @@ public class Task {
     }
     
     public Task() {
+        
         this.createdAt = Calendar.getInstance();
         this.updatedAt = Calendar.getInstance();
-        
     }
 
     public int getId() {
@@ -81,47 +81,35 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public Calendar getDeadline() {
-        deadline = Calendar.getInstance();
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Calendar deadline) {
-        this.deadline = Calendar.getInstance();
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public Calendar getCreatedAt() {
-        createdAt = Calendar.getInstance();
+        this.createdAt = Calendar.getInstance();
         return createdAt;
     }
 
     public void setCreatedAt(Calendar createdAt) {
-        this.createdAt = Calendar.getInstance();
+        this.createdAt = createdAt;
     }
 
     public Calendar getUpdatedAt() {
-        updatedAt = Calendar.getInstance();
+        this.updatedAt = Calendar.getInstance();
         return updatedAt;
     }
 
     public void setUpdatedAt(Calendar updatedAt) {
-        updatedAt = Calendar.getInstance();
         this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
         return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
-    }
-
-    public void setDeadline(Date deadline) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setDeadline(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
+    } 
     
 }
